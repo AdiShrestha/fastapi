@@ -1,0 +1,1 @@
+web: pip install gunicorn && gunicorn test:app --reload
