@@ -1,20 +1,12 @@
 import requests
-from urllib.parse import quote
 
 def checkWord(x: str):
-    url = f"https://fastapiaimodel.azurewebsites.net/evaluate_text/{quote(x)}"
-    try:
-        response = requests.post(url)
-        response_data = response.json()
-        if response_data.get("detail") == "Offensive":
-            return True
-        elif response_data.get("detail") == "Not Offensive":
-            return False
-        else:
-            print("Error:", response_data.get("message", "Unknown error"))
-            return False
-    except Exception as e:
-        print("Exception during request:", str(e))
+    url = "https://fastapiaimodel.azurewebsites.net/evaluate_text"
+    data = {"text": x}
+    response = requests.post(url, json=data)
+    if response.json()["detail"] == "Offensive":
+        return True
+    elif response.json()["detail"] == "Not Offensive":
         return False
 
 while True:
@@ -25,3 +17,4 @@ while True:
         print("Offensive")
     else:
         print("Not Offensive")
+    
