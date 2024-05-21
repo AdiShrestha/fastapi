@@ -17,7 +17,6 @@ with open('model.pkl', 'rb') as file:
 
 class TextRequest(BaseModel):
     text: str
-
 @app.post("/evaluate_text/")
 async def evaluate_text_endpoint(text_request: TextRequest):
     text = text_request.text
